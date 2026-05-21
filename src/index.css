@@ -135,6 +135,39 @@ img {
   transition: var(--transition-normal);
 }
 
+.auth-error-banner {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 8px 24px;
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border-bottom: 1px solid #fecaca;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.close-error {
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #b91c1c;
+  padding: 0 4px;
+}
+
 .header-container {
   max-width: 1400px;
   margin: 0 auto;

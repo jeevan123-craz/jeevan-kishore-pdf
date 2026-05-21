@@ -6,10 +6,16 @@ interface HeaderProps {
 }
 
 export const Header = ({ onLogoClick }: HeaderProps) => {
-    const { user, signInWithGoogle, logout } = useAuth();
+    const { user, signInWithGoogle, logout, error, clearError } = useAuth();
 
     return (
         <header className="header">
+            {error && (
+                <div className="auth-error-banner">
+                    <p>{error}</p>
+                    <button onClick={clearError} className="close-error">×</button>
+                </div>
+            )}
             <div className="header-container">
                 <div className="logo" onClick={onLogoClick} style={{ cursor: 'pointer' }}>
                     <div className="logo-icon">
