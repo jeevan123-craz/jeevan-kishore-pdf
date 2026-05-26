@@ -1,23 +1,27 @@
 import { useCallback } from 'react';
+import type { ReactNode } from 'react';
 import { useDropzone } from 'react-dropzone';
+import type { Accept } from 'react-dropzone';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 
 interface DropzoneProps {
     onFilesAdded: (files: File[]) => void;
-    accept?: string;
+    accept?: Accept;
     multiple?: boolean;
     maxFiles?: number;
     title?: string;
     subtitle?: string;
+    icon?: ReactNode;
 }
 
 export const Dropzone = ({
     onFilesAdded,
-    // accept removed as it's not used currently
+    accept,
     multiple = true,
     maxFiles = 50,
-    title = 'Drop PDF files here',
-    subtitle = 'or click to select files'
+    title = 'Drop files here',
+    subtitle = 'or click to select files',
+    icon = <FaCloudUploadAlt />
 }: DropzoneProps) => {
     const onDrop = useCallback((acceptedFiles: File[]) => {
         onFilesAdded(acceptedFiles);
@@ -25,7 +29,7 @@ export const Dropzone = ({
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        accept: {
+        accept: accept || {
             'application/pdf': ['.pdf'],
             'image/*': ['.jpg', '.jpeg', '.png', '.gif', '.webp']
         },
@@ -40,7 +44,7 @@ export const Dropzone = ({
         >
             <input {...getInputProps()} />
             <div className="dropzone-icon">
-                <FaCloudUploadAlt />
+                {icon}
             </div>
             <h3>{isDragActive ? 'Drop files here...' : title}</h3>
             <p>{subtitle}</p>

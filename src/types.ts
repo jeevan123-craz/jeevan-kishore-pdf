@@ -12,7 +12,7 @@ export interface Tool {
     description: string;
     icon: string;
     color: string;
-    category: 'organize' | 'optimize' | 'convert' | 'edit' | 'security';
+    category: 'organize' | 'optimize' | 'convert' | 'edit' | 'security' | 'video' | 'audio';
 }
 
 export type ToolId =
@@ -27,7 +27,10 @@ export type ToolId =
     | 'organize'
     | 'unlock'
     | 'protect'
-    | 'repair';
+    | 'repair'
+    | 'video-to-audio'
+    | 'compress-video'
+    | 'video-to-gif';
 
 export interface ProcessingState {
     isProcessing: boolean;

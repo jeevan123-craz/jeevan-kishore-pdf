@@ -5,9 +5,9 @@ interface FileListProps {
     files: PDFFile[];
     onRemove: (id: string) => void;
     onReorder?: (files: PDFFile[]) => void;
-    onAddMore: () => void;
-    processButtonText: string;
-    onProcess: () => void;
+    onAddMore?: () => void;
+    processButtonText?: string;
+    onProcess?: () => void;
     isProcessing?: boolean;
 }
 
@@ -15,7 +15,7 @@ export const FileList = ({
     files,
     onRemove,
     onAddMore,
-    processButtonText,
+    processButtonText = 'Process',
     onProcess,
     isProcessing = false
 }: FileListProps) => {
@@ -36,10 +36,12 @@ export const FileList = ({
         <div className="files-container">
             <div className="files-header">
                 <h2>{files.length} file{files.length !== 1 ? 's' : ''} selected</h2>
-                <button className="add-more-btn" onClick={onAddMore}>
-                    <FaPlus />
-                    Add more files
-                </button>
+                {onAddMore && (
+                    <button className="add-more-btn" onClick={onAddMore}>
+                        <FaPlus />
+                        Add more files
+                    </button>
+                )}
             </div>
 
             <div className="files-list">
@@ -68,13 +70,15 @@ export const FileList = ({
                 ))}
             </div>
 
-            <button
-                className="process-btn"
-                onClick={onProcess}
-                disabled={files.length === 0 || isProcessing}
-            >
-                {isProcessing ? 'Processing...' : processButtonText}
-            </button>
+            {onProcess && (
+                <button
+                    className="process-btn"
+                    onClick={onProcess}
+                    disabled={files.length === 0 || isProcessing}
+                >
+                    {isProcessing ? 'Processing...' : processButtonText}
+                </button>
+            )}
         </div>
     );
 };

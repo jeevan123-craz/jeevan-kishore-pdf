@@ -9,11 +9,13 @@ import { ResultScreen } from '../components/ResultScreen';
 import type { PDFFile } from '../types';
 import { fileToPDFFile, splitPDF, createZip, downloadFile } from '../utils/pdfUtils';
 
-interface SplitPageProps {
-    onBack: () => void;
-}
 
-export const SplitPage = ({ onBack }: SplitPageProps) => {
+
+import { useNavigate } from 'react-router-dom';
+
+export const SplitPage = () => {
+    const navigate = useNavigate();
+    const handleBack = () => navigate('/');
     const [files, setFiles] = useState<PDFFile[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [result, setResult] = useState<Blob | null>(null);
@@ -69,10 +71,10 @@ export const SplitPage = ({ onBack }: SplitPageProps) => {
 
     return (
         <div className="tool-page">
-            <Header onLogoClick={onBack} />
+            <Header onLogoClick={handleBack} />
 
             <div className="tool-header">
-                <button className="tool-back-btn" onClick={onBack}>
+                <button className="tool-back-btn" onClick={handleBack}>
                     <FaArrowLeft /> Back to all tools
                 </button>
                 <h1>Split PDF</h1>

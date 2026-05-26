@@ -9,11 +9,13 @@ import { ResultScreen } from '../components/ResultScreen';
 import type { PDFFile } from '../types';
 import { fileToPDFFile, rotatePDF, downloadFile } from '../utils/pdfUtils';
 
-interface RotatePageProps {
-    onBack: () => void;
-}
 
-export const RotatePage = ({ onBack }: RotatePageProps) => {
+
+import { useNavigate } from 'react-router-dom';
+
+export const RotatePage = () => {
+    const navigate = useNavigate();
+    const handleBack = () => navigate('/');
     const [files, setFiles] = useState<PDFFile[]>([]);
     const [rotation, setRotation] = useState(90);
     const [isProcessing, setIsProcessing] = useState(false);
@@ -67,10 +69,10 @@ export const RotatePage = ({ onBack }: RotatePageProps) => {
 
     return (
         <div className="tool-page">
-            <Header onLogoClick={onBack} />
+            <Header onLogoClick={handleBack} />
 
             <div className="tool-header">
-                <button className="tool-back-btn" onClick={onBack}>
+                <button className="tool-back-btn" onClick={handleBack}>
                     <FaArrowLeft /> Back to all tools
                 </button>
                 <h1>Rotate PDF</h1>

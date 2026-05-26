@@ -9,11 +9,13 @@ import { ResultScreen } from '../components/ResultScreen';
 import type { PDFFile } from '../types';
 import { fileToPDFFile, addPageNumbers, downloadFile } from '../utils/pdfUtils';
 
-interface PageNumbersPageProps {
-    onBack: () => void;
-}
 
-export const PageNumbersPage = ({ onBack }: PageNumbersPageProps) => {
+
+import { useNavigate } from 'react-router-dom';
+
+export const PageNumbersPage = () => {
+    const navigate = useNavigate();
+    const handleBack = () => navigate('/');
     const [files, setFiles] = useState<PDFFile[]>([]);
     const [position, setPosition] = useState<'bottom-center' | 'bottom-right' | 'bottom-left'>('bottom-center');
     const [isProcessing, setIsProcessing] = useState(false);
@@ -66,10 +68,10 @@ export const PageNumbersPage = ({ onBack }: PageNumbersPageProps) => {
 
     return (
         <div className="tool-page">
-            <Header onLogoClick={onBack} />
+            <Header onLogoClick={handleBack} />
 
             <div className="tool-header">
-                <button className="tool-back-btn" onClick={onBack}>
+                <button className="tool-back-btn" onClick={handleBack}>
                     <FaArrowLeft /> Back to all tools
                 </button>
                 <h1>Add Page Numbers</h1>

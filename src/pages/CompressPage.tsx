@@ -9,11 +9,13 @@ import { ResultScreen } from '../components/ResultScreen';
 import type { PDFFile } from '../types';
 import { fileToPDFFile, compressPDF, downloadFile, formatFileSize } from '../utils/pdfUtils';
 
-interface CompressPageProps {
-    onBack: () => void;
-}
 
-export const CompressPage = ({ onBack }: CompressPageProps) => {
+
+import { useNavigate } from 'react-router-dom';
+
+export const CompressPage = () => {
+    const navigate = useNavigate();
+    const handleBack = () => navigate('/');
     const [files, setFiles] = useState<PDFFile[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [result, setResult] = useState<{ data: Uint8Array; originalSize: number } | null>(null);
@@ -72,10 +74,10 @@ export const CompressPage = ({ onBack }: CompressPageProps) => {
 
     return (
         <div className="tool-page">
-            <Header onLogoClick={onBack} />
+            <Header onLogoClick={handleBack} />
 
             <div className="tool-header">
-                <button className="tool-back-btn" onClick={onBack}>
+                <button className="tool-back-btn" onClick={handleBack}>
                     <FaArrowLeft /> Back to all tools
                 </button>
                 <h1>Compress PDF</h1>

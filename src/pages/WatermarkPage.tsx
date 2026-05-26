@@ -8,11 +8,13 @@ import { ResultScreen } from '../components/ResultScreen';
 import type { PDFFile } from '../types';
 import { fileToPDFFile, addWatermarkToPDF, downloadFile } from '../utils/pdfUtils';
 
-interface WatermarkPageProps {
-    onBack: () => void;
-}
 
-export const WatermarkPage = ({ onBack }: WatermarkPageProps) => {
+
+import { useNavigate } from 'react-router-dom';
+
+export const WatermarkPage = () => {
+    const navigate = useNavigate();
+    const handleBack = () => navigate('/');
     const [files, setFiles] = useState<PDFFile[]>([]);
     const [watermarkText, setWatermarkText] = useState('Jeevan Kishore');
     const [status, setStatus] = useState<'upload' | 'processing' | 'done'>('upload');
@@ -37,10 +39,10 @@ export const WatermarkPage = ({ onBack }: WatermarkPageProps) => {
 
     return (
         <div className="tool-page animate-fade-in">
-            <Header onLogoClick={onBack} />
+            <Header onLogoClick={handleBack} />
 
             <section className="tool-header">
-                <button className="tool-back-btn" onClick={onBack}>
+                <button className="tool-back-btn" onClick={handleBack}>
                     <FaArrowLeft /> Back to Tools
                 </button>
                 <h1>Add Watermark</h1>

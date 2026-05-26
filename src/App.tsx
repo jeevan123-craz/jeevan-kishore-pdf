@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './index.css';
 import { HomePage } from './pages/HomePage';
 import { MergePage } from './pages/MergePage';
@@ -13,59 +13,31 @@ import { UnlockPage } from './pages/UnlockPage';
 import { OrganizePage } from './pages/OrganizePage';
 import { RepairPage } from './pages/RepairPage';
 import { PdfToJpgPage } from './pages/PdfToJpgPage';
-import type { ToolId } from './types';
+import { ExtractAudioPage } from './pages/ExtractAudioPage';
+import { CompressVideoPage } from './pages/CompressVideoPage';
+import { VideoToGifPage } from './pages/VideoToGifPage';
 
 function App() {
-  const [currentTool, setCurrentTool] = useState<ToolId | null>(null);
-
-  const handleSelectTool = (toolId: ToolId) => {
-    setCurrentTool(toolId);
-    window.scrollTo(0, 0);
-  };
-
-  const handleBack = () => {
-    setCurrentTool(null);
-    window.scrollTo(0, 0);
-  };
-
-  const renderPage = () => {
-    if (!currentTool) {
-      return <HomePage onSelectTool={handleSelectTool} />;
-    }
-
-    switch (currentTool) {
-      case 'merge':
-        return <MergePage onBack={handleBack} />;
-      case 'split':
-        return <SplitPage onBack={handleBack} />;
-      case 'compress':
-        return <CompressPage onBack={handleBack} />;
-      case 'rotate':
-        return <RotatePage onBack={handleBack} />;
-      case 'add-page-numbers':
-        return <PageNumbersPage onBack={handleBack} />;
-      case 'jpg-to-pdf':
-        return <JpgToPdfPage onBack={handleBack} />;
-      case 'add-watermark':
-        return <WatermarkPage onBack={handleBack} />;
-      case 'protect':
-        return <ProtectPage onBack={handleBack} />;
-      case 'unlock':
-        return <UnlockPage onBack={handleBack} />;
-      case 'organize':
-        return <OrganizePage onBack={handleBack} />;
-      case 'repair':
-        return <RepairPage onBack={handleBack} />;
-      case 'pdf-to-jpg':
-        return <PdfToJpgPage onBack={handleBack} />;
-      default:
-        return <HomePage onSelectTool={handleSelectTool} />;
-    }
-  };
-
   return (
     <div className="app-root">
-      {renderPage()}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/merge" element={<MergePage />} />
+        <Route path="/split" element={<SplitPage />} />
+        <Route path="/compress" element={<CompressPage />} />
+        <Route path="/rotate" element={<RotatePage />} />
+        <Route path="/add-page-numbers" element={<PageNumbersPage />} />
+        <Route path="/jpg-to-pdf" element={<JpgToPdfPage />} />
+        <Route path="/add-watermark" element={<WatermarkPage />} />
+        <Route path="/protect" element={<ProtectPage />} />
+        <Route path="/unlock" element={<UnlockPage />} />
+        <Route path="/organize" element={<OrganizePage />} />
+        <Route path="/repair" element={<RepairPage />} />
+        <Route path="/pdf-to-jpg" element={<PdfToJpgPage />} />
+        <Route path="/video-to-audio" element={<ExtractAudioPage />} />
+        <Route path="/compress-video" element={<CompressVideoPage />} />
+        <Route path="/video-to-gif" element={<VideoToGifPage />} />
+      </Routes>
     </div>
   );
 }

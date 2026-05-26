@@ -8,11 +8,13 @@ import { ResultScreen } from '../components/ResultScreen';
 import type { PDFFile } from '../types';
 import { fileToPDFFile, protectPDF, downloadFile } from '../utils/pdfUtils';
 
-interface ProtectPageProps {
-    onBack: () => void;
-}
 
-export const ProtectPage = ({ onBack }: ProtectPageProps) => {
+
+import { useNavigate } from 'react-router-dom';
+
+export const ProtectPage = () => {
+    const navigate = useNavigate();
+    const handleBack = () => navigate('/');
     const [files, setFiles] = useState<PDFFile[]>([]);
     const [password, setPassword] = useState('');
     const [status, setStatus] = useState<'upload' | 'processing' | 'done'>('upload');
@@ -36,9 +38,9 @@ export const ProtectPage = ({ onBack }: ProtectPageProps) => {
 
     return (
         <div className="tool-page animate-fade-in">
-            <Header onLogoClick={onBack} />
+            <Header onLogoClick={handleBack} />
             <section className="tool-header">
-                <button className="tool-back-btn" onClick={onBack}>
+                <button className="tool-back-btn" onClick={handleBack}>
                     <FaArrowLeft /> Back to Tools
                 </button>
                 <h1>Protect PDF</h1>

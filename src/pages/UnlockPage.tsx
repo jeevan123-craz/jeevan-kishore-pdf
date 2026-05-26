@@ -8,11 +8,13 @@ import { ResultScreen } from '../components/ResultScreen';
 import type { PDFFile } from '../types';
 import { fileToPDFFile, unlockPDF, downloadFile } from '../utils/pdfUtils';
 
-interface UnlockPageProps {
-    onBack: () => void;
-}
 
-export const UnlockPage = ({ onBack }: UnlockPageProps) => {
+
+import { useNavigate } from 'react-router-dom';
+
+export const UnlockPage = () => {
+    const navigate = useNavigate();
+    const handleBack = () => navigate('/');
     const [files, setFiles] = useState<PDFFile[]>([]);
     const [status, setStatus] = useState<'upload' | 'processing' | 'done'>('upload');
 
@@ -35,9 +37,9 @@ export const UnlockPage = ({ onBack }: UnlockPageProps) => {
 
     return (
         <div className="tool-page animate-fade-in">
-            <Header onLogoClick={onBack} />
+            <Header onLogoClick={handleBack} />
             <section className="tool-header">
-                <button className="tool-back-btn" onClick={onBack}>
+                <button className="tool-back-btn" onClick={handleBack}>
                     <FaArrowLeft /> Back to Tools
                 </button>
                 <h1>Unlock PDF</h1>
