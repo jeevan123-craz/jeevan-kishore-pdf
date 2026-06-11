@@ -1,73 +1,69 @@
-# React + TypeScript + Vite
+# ILovePDF Clone & Multi-Tool 📄🎥
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **A comprehensive web-based suite for manipulating PDFs and Video files directly in your browser.**
 
-Currently, two official plugins are available:
+This project is a powerful, client-side application inspired by ILovePDF. It provides an extensive collection of tools to merge, split, compress, and edit PDFs, as well as powerful video manipulation features—all without sending your sensitive files to a server. Processing is done securely right in your browser using WebAssembly.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+### 📄 PDF Tools
+- **Merge & Split:** Combine multiple PDFs into one or extract specific pages.
+- **Compress & Repair:** Reduce PDF file size and attempt to repair corrupted files.
+- **Organize & Rotate:** Reorder pages, delete pages, and rotate them as needed.
+- **Convert:** Convert JPG to PDF or extract PDF pages to JPGs.
+- **Secure:** Protect PDFs with passwords or unlock them.
+- **Enhance:** Add watermarks and page numbers easily.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🎥 Video Tools
+- **Video to Audio:** Extract high-quality audio tracks from video files.
+- **Compress Video:** Reduce video file sizes efficiently.
+- **Video to GIF:** Convert video clips into animated GIFs.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend:** React, TypeScript, Vite
+- **Styling:** CSS, React Icons
+- **PDF Processing:** `pdf-lib`, `pdfjs-dist`
+- **Video Processing:** `ffmpeg.wasm` (`@ffmpeg/ffmpeg`, `@ffmpeg/util`)
+- **File Handling:** `react-dropzone`, `file-saver`, `jszip`
+- **Backend/Analytics:** Firebase (for optional auth/stats)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Setup & Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerequisites
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Node.js installed on your machine.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Clone the repository:
+   ```bash
+   git clone <repo-url>
+   cd ilovepdf-clone
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   Copy `.env.example` to `.env.local` and fill in your Firebase configuration if you wish to use Firebase features.
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## 🔒 Privacy First
+
+By leveraging `pdf-lib` and `ffmpeg.wasm`, all heavy lifting is performed on the client side. Your files never leave your device, ensuring maximum privacy and security for your sensitive documents and media.
+
+## 📜 License
+
+This project is licensed under the MIT License.
